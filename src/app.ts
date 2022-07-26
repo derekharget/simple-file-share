@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import helmet from 'helmet';
 import { initCors } from './boot/cors';
 import { fileExists, grabFileStream } from './helpers';
@@ -11,7 +11,7 @@ class Server {
     this.app = express();
     this.config();
 
-    this.app.get('/:authcode/:filename', async (req, res) => {
+    this.app.get('/:authcode/:filename', async (req: Request, res: Response) => {
       const { filename, authcode } = req.params;
 
       if (!validator.isUUID(authcode)) {
